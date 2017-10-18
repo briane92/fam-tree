@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 const RelationshipSelector = ({relationships}) =>
     <select>
         { relationships.map( (r) =>
-            <option value ={r}> {r} </option>
+            <option key={r} value ={r}> {r} </option>
         )}
     </select>
 
