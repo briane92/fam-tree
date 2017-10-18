@@ -2,24 +2,54 @@ import React, { Component } from 'react';
 import './App.css';
 import RelationshipSelector from './selectionboxes';
 
-class RelationshipForm extends React.Component {
+class RelationshipForm extends Component {
 
     constructor(props){
         super(props)
-
+        this.state = {
+            name: "Enter Name",
+            relation: "self"
+        }
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleName = this.handleName.bind(this)
+        this.handleRelation = this.handleRelation.bind(this)
     }
 
-    render() {
 
-        if (props.showForm) {
+    handleSubmit(event){
+        alert('submission occured')
+        this.props.closeModal()
+        event.preventDefault()
+        this.props.addRelation({
+            name: this.state.name,
+            relation: this.state.relation
+        })
+    }
+
+    handleName(event){
+        console.log(event.target.value)
+        this.setState({name:event.target.value})
+    }
+
+    handleRelation(event){
+        console.log(event.target.value)
+        this.setState({relation:event.target.value})
+    }
+
+
+    render() {
+        const showForm = this.props.showForm
+        const closeModal = this.props.closeModal
+
+        if (showForm) {
             return (
                 <div className="modal">
                     <div className="modal-content">
-                        <form>
-                        <span className="close" onClick={props.closeModal}>&times;</span>
-                        <label>Name</label> <input type="text"/> <br/>
-                        <label>Relationship</label><RelationshipSelector/><br/>
-                        <button type="button" onClick={() => alert("clicked") }>Add</button>
+                        <form onSubmit={this.handleSubmit}>
+                        <span className="close" onClick={closeModal}>&times;</span>
+                        <label>Name</label> <input type="text" onChange={this.handleName}/> <br/>
+                        <label>Relationship</label><RelationshipSelector onChange={this.handleRelation}/><br/>
+                        <button type="submit" value="submit" >Add</button>
                         </form>
                     </div>
                 </div>)
@@ -41,8 +71,8 @@ const MemberGrid = ({mems}) =>
         {
             mems.map(m => {
                 return (
-                    <div>
-                        <Member r={m} key = {m.name} />
+                    <div key={m.name}>
+                        <Member r={m} />
                         <br/>
                         <br/>
                     </div>)
@@ -71,10 +101,16 @@ class App extends Component {
             AddRelationship: false
         }
         this.closeModal = this.closeModal.bind(this);
+        this.addRelation = this.addRelation.bind(this);
     }
 
-    closeModal=  () => this.setState({AddRelationship:false})
-
+    closeModal = () => this.setState({AddRelationship:false})
+    addRelation = (relation)  => {
+        const updatedrelations = [...this.state.relationships, relation]
+        this.setState({
+            relationships: updatedrelations
+        })
+    }
 
   render(
   ) {
@@ -83,7 +119,7 @@ class App extends Component {
           <h1 id="heading"> Family Tree </h1>
           <MemberGrid mems={this.state.relationships}/>
           <button type="button" onClick={()=> this.setState({AddRelationship:true})}>Add Relationship</button>
-          <RelationshipForm showForm={this.state.AddRelationship} closeModal = {this.closeModal} />
+          <RelationshipForm showForm={this.state.AddRelationship} closeModal = {this.closeModal} addRelation = {this.addRelation}/>
 
       </div>
     );

@@ -4,15 +4,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const RelationshipSelector = ({relationships}) =>
-    <select>
+const RelationshipSelector = ({relationships, onChange}) =>
+    <select onChange={onChange}>
         { relationships.map( (r) =>
             <option key={r} value ={r}> {r} </option>
         )}
     </select>
 
 RelationshipSelector.propTypes = {
-    relationships: PropTypes.arrayOf(PropTypes.string)
+    relationships: PropTypes.arrayOf(PropTypes.string),
+    onChange: PropTypes.func.isRequired
 
 }
 
