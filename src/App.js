@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import './App.css'
-import RelationshipSelector from './selectionboxes'
 import {MemberGrid} from './member'
-import RelationshipForm from './form'
+import RelationshipForm from './relationship'
 
 class App extends Component {
     constructor () {
