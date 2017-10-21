@@ -1,6 +1,10 @@
-import React, { Component } from 'react';
-import './App.css';
-import RelationshipSelector from './selectionboxes';
+import React, { Component } from 'react'
+import '../node_modules/bootstrap/dist/css/bootstrap.css'
+import '../node_modules/jquery/dist/jquery'
+import '../node_modules/bootstrap/dist/js/bootstrap.js'
+import './App.css'
+import RelationshipSelector from './selectionboxes'
+
 
 class RelationshipForm extends Component {
 
@@ -17,7 +21,6 @@ class RelationshipForm extends Component {
 
 
     handleSubmit(event){
-        alert('submission occured')
         this.props.closeModal()
         event.preventDefault()
         this.props.addRelation({
@@ -61,8 +64,15 @@ class RelationshipForm extends Component {
 
 const Member = ({r}) =>
     <div>
-        <label>Name:</label> <span> {r.name}</span> <br/>
-        <label>Relation:</label> <span>{r.relation}</span> <br/>
+        <svg width="100" height="100" xmlns="http://www.w3.org/2000/svg" style={{filter: 'drop-shadow( 5px 5px 5px black )'}}>
+            <g >
+                <circle cx="50%" cy="50%" r="50%" fill="#779ecb"  />
+                <text x="50%" y="50%" text-anchor="middle" >{r.name} </text>
+                <text x="50%" y="70%" text-anchor="middle" >{r.relation}</text>
+            </g>
+        </svg>
+       {/* <label>Name:</label> <span> {r.name}</span> <br/>
+        <label>Relation:</label> <span>{r.relation}</span> <br/>*/}
     </div>
 
 
@@ -73,7 +83,6 @@ const MemberGrid = ({mems}) =>
                 return (
                     <div key={m.name}>
                         <Member r={m} />
-                        <br/>
                         <br/>
                     </div>)
 
@@ -116,7 +125,7 @@ class App extends Component {
   ) {
     return (
       <div className="App">
-          <h1 id="heading"> Family Tree </h1>
+          <h1 id="heading"> Family Graph </h1>
           <MemberGrid mems={this.state.relationships}/>
           <button type="button" onClick={()=> this.setState({AddRelationship:true})}>Add Relationship</button>
           <RelationshipForm showForm={this.state.AddRelationship} closeModal = {this.closeModal} addRelation = {this.addRelation}/>

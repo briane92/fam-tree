@@ -18,7 +18,7 @@ RelationshipSelector.propTypes = {
 }
 
 RelationshipSelector.defaultProps = {
-    relationships: ["Mother", "Father", "Sister", "Brother"]
+    relationships: ["Mother", "Father", "Sister", "Brother", "Self", "Uncle", "Aunt", "Cousin"]
 }
 
 export default RelationshipSelector
