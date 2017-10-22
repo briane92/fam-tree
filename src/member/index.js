@@ -2,7 +2,7 @@
  * Created by beggl on 10/20/2017.
  */
 import React from 'react'
-
+import PropTypes, {arrayOf, shape, string} from 'prop-types'
 
 const Member = ({r}) =>
     <div>
@@ -18,6 +18,13 @@ const Member = ({r}) =>
     </div>
 
 
+Member.propTypes = {
+    r: PropTypes.shape({
+        name: PropTypes.string,
+        relation: PropTypes.string
+    }).isRequired
+}
+
 const MemberGrid = ({mems}) =>
     <div>
         {
@@ -31,6 +38,13 @@ const MemberGrid = ({mems}) =>
                 }
             )}
     </div>
+
+MemberGrid.propTypes = {
+    mems: PropTypes.arrayOf(PropTypes.shape({
+        name: PropTypes.string,
+        relation: PropTypes.string})).isRequired
+}
+
 
 
 export {Member, MemberGrid}
