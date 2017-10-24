@@ -37,7 +37,7 @@ class EventForm extends Component {
                 <label>Title</label><input type="text"/><br/>
                 <label>Date</label><input type="text" /><br/>
                 <label>Description</label><br/>
-                <input type="text-area"/>
+                <textarea/>
                 <button type="submit" value="submit">Add</button>
             </form>)
 
@@ -46,4 +46,4 @@ class EventForm extends Component {
     }
 }
 
-export {Event, Timeline}
+export {Event, Timeline, EventForm}

@@ -2,13 +2,15 @@ import React, { Component } from 'react'
 import './App.css'
 import {MemberGrid} from './member'
 import RelationshipForm from './relationship'
+import {EventForm} from './event'
 import withModal from './modal'
 
 class App extends Component {
     constructor () {
         super()
         this.state = {
-            AddRelationship: false
+            AddRelationship: false,
+            AddEvent:false,
         }
         this.closeModal = this.closeModal.bind(this);
         this.addRelation = this.addRelation.bind(this);
@@ -25,13 +27,15 @@ class App extends Component {
   render(
   ) {
         const RelationFormWithModal = withModal(RelationshipForm)
+        const EventFormWithModal = withModal(MemberGrid)
 
     return (
       <div className="App">
           <h1 id="heading"> Family Graph </h1>
           <MemberGrid mems={this.state.relationships}/>
-          <button type="button" onClick={()=> this.setState({AddRelationship:true})}>Add Relationship</button>
+          <button type="button" onClick={()=> this.setState({AddRelationship:true})}>Add Relationship</button> <button type="button" onClick={()=> this.setState({AddEvent:true})}>Add Event</button>
           <RelationFormWithModal showContent = {this.state.AddRelationship} />
+          <EventFormWithModal showContent = {this.state.AddEvent} />
       </div>
     );
   }
