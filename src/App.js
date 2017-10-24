@@ -31,8 +31,7 @@ class App extends Component {
           <h1 id="heading"> Family Graph </h1>
           <MemberGrid mems={this.state.relationships}/>
           <button type="button" onClick={()=> this.setState({AddRelationship:true})}>Add Relationship</button>
-          /* <RelationshipForm showForm={this.state.AddRelationship} closeModal = {this.closeModal} addRelation = {this.addRelation}/> */
-          <RelationFormWithModal showContent = {false} />
+          <RelationFormWithModal showContent = {this.state.AddRelationship} />
       </div>
     );
   }

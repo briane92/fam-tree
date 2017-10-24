@@ -2,17 +2,18 @@
  * Created by beggl on 10/23/2017.
  */
 import React, { Component } from 'react'
-const withModal = (wrappedComponent) => {
+import './index.css'
+const withModal = (WrappedComponent) => {
     return class ModaledComponent extends Component {
 
         constructor(props){
             super(props)
 
             this.state = {
-                showContent:false,
+                showContent: props.showContent,
             }
 
-            this.closeModal = this.closeModal.bind();
+            this.closeModal = this.closeModal.bind(this);
         }
 
         closeModal(event){
@@ -23,12 +24,12 @@ const withModal = (wrappedComponent) => {
 
         render() {
 
-            const showContent = this.props.showContent;
+            const showContent = this.state.showContent;
             if(showContent){
             return (<div className="modal">
                 <div className="modal-content">
                     <span className="close" onClick={this.closeModal}>&times;</span>
-                    <wrappedComponent {...this.props}/>
+                    <WrappedComponent />
                 </div>
             </div>)
             }else{
