@@ -45,6 +45,22 @@ MemberGrid.propTypes = {
         relation: PropTypes.string})).isRequired
 }
 
+MemberGrid.defaultProps = {
+    mems: [
+        {
+            name: "Brian",
+            relation: "Self"
+        },
+        {
+            name: "Lashelle",
+            relation: "Mother"
+        },
+        {
+            name: "Brooke",
+            relation: "Sister"
+        }]
+}
+
 
 
 export {Member, MemberGrid}

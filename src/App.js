@@ -2,23 +2,12 @@ import React, { Component } from 'react'
 import './App.css'
 import {MemberGrid} from './member'
 import RelationshipForm from './relationship'
+import withModal from './modal'
 
 class App extends Component {
     constructor () {
         super()
         this.state = {
-            relationships: [{
-                name: "brian",
-                relation: "self"
-            },
-                {
-                name: "Lashelle",
-                relation: "Mother"
-            },
-                {
-                    name: "Brooke",
-                    relation: "Sister"
-                }],
             AddRelationship: false
         }
         this.closeModal = this.closeModal.bind(this);
@@ -35,13 +24,15 @@ class App extends Component {
 
   render(
   ) {
+        const RelationFormWithModal = withModal(RelationshipForm)
+
     return (
       <div className="App">
           <h1 id="heading"> Family Graph </h1>
           <MemberGrid mems={this.state.relationships}/>
           <button type="button" onClick={()=> this.setState({AddRelationship:true})}>Add Relationship</button>
-          <RelationshipForm showForm={this.state.AddRelationship} closeModal = {this.closeModal} addRelation = {this.addRelation}/>
-
+          /* <RelationshipForm showForm={this.state.AddRelationship} closeModal = {this.closeModal} addRelation = {this.addRelation}/> */
+          <RelationFormWithModal showContent = {false} />
       </div>
     );
   }

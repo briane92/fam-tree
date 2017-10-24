@@ -38,7 +38,6 @@ class RelationshipForm extends Component {
 
 
     handleSubmit(event){
-        this.props.closeModal()
         event.preventDefault()
         this.props.addRelation({
             name: this.state.name,
@@ -58,24 +57,16 @@ class RelationshipForm extends Component {
 
 
     render() {
-        const showForm = this.props.showForm
-        const closeModal = this.props.closeModal
 
-        if (showForm) {
+
             return (
-                <div className="modal">
-                    <div className="modal-content">
                         <form onSubmit={this.handleSubmit}>
-                            <span className="close" onClick={closeModal}>&times;</span>
                             <label>Name</label> <input type="text" onChange={this.handleName}/> <br/>
                             <label>Relationship</label><RelationshipSelector onChange={this.handleRelation}/><br/>
                             <button type="submit" value="submit" >Add</button>
                         </form>
-                    </div>
-                </div>)
-        } else {
-            return null;
-        }
+              )
+
     }
 }
 
