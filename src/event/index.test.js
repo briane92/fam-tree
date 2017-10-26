@@ -8,12 +8,12 @@ import {Event} from './index'
 
 it('Event component renders correct', ()=> {
     let e = {
-        title: "Bud's Births",
-        date: new Date(1992, 10, 29),
-        description: "Lashelle gave birth to her first son Bud",
+        title: "Christmas of 1992",
+        date: new Date(1992, 11, 25),
+        description: "Christmas of 1992 was spent in New York City",
     }
-    const tree = renderer.create(
-        <Event e={e}/>
-    ).toJSON()
+
+    const component = renderer.create(<Event e={e}/>)
+    let tree = component.toJSON()
     expect(tree).toMatchSnapshot()
 })
