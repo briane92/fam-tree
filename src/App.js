@@ -4,6 +4,7 @@ import {MemberGrid} from './member'
 import RelationshipForm from './relationship'
 import {EventForm} from './event'
 import withModal from './modal'
+import {Button} from 'semantic-ui-react'
 
 class App extends Component {
     constructor () {
@@ -34,6 +35,7 @@ class App extends Component {
           <h1 id="heading"> Family Graph </h1>
           <MemberGrid mems={this.state.relationships}/>
           <button type="button" onClick={()=> this.setState({AddRelationship:true})}>Add Relationship</button> <button type="button" onClick={()=> this.setState({AddEvent:true})}>Add Event</button>
+          <Button onClick={()=> this.setState({AddRelationship:true})} color='black'> Add Relationship </Button>
           <RelationFormWithModal showContent = {this.state.AddRelationship} />
           <EventFormWithModal showContent = {this.state.AddEvent} />
       </div>

@@ -13,6 +13,7 @@
     "react-dom": "^16.0.0",
     "react-scripts": "1.0.14",
     "react-test-renderer": "^16.0.0",
+    "semantic-ui-css": "^2.2.12",
     "semantic-ui-react": "^0.75.1",
     "tether": "^1.4.0",
     "util": "^0.10.3"
