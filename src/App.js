@@ -27,7 +27,7 @@ class App extends Component {
   render(
   ) {
         const RelationFormWithModal = withModal(RelationshipForm)
-        const EventFormWithModal = withModal(MemberGrid)
+        const EventFormWithModal = withModal(EventForm)
 
     return (
       <div className="App">
