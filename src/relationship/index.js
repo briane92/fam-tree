@@ -3,6 +3,7 @@
  */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import {Button, Form } from 'semantic-ui-react'
 
 const RelationshipSelector = ({relationships, onChange}) =>
     <select onChange={onChange}>
@@ -60,11 +61,17 @@ class RelationshipForm extends Component {
 
 
             return (
-                        <form onSubmit={this.handleSubmit}>
-                            <label>Name</label> <input type="text" onChange={this.handleName}/> <br/>
-                            <label>Relationship</label><RelationshipSelector onChange={this.handleRelation}/><br/>
-                            <button type="submit" value="submit" >Add</button>
-                        </form>
+                        <Form onSubmit={this.handleSubmit}>
+                            <Form.Field>
+                                <label>Name</label>
+                                <input type="text" placeholder='Name of Family Member' onChange={this.handleName}/> <br/>
+                            </Form.Field>
+                            <Form.Field>
+                                <label>Relationship</label>
+                                <RelationshipSelector onChange={this.handleRelation}/><br/>
+                            </Form.Field>
+                            <Button type='submit' color='black' >Add</Button>
+                        </Form>
               )
 
     }

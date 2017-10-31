@@ -2,13 +2,20 @@
  * Created by beggl on 10/20/2017.
  */
 import React from 'react'
-import PropTypes, {arrayOf, shape, string} from 'prop-types'
+import PropTypes from 'prop-types'
+import {Card } from 'semantic-ui-react'
 
 const Member = ({r}) =>
-    <div>
-        <h1> {r.name} </h1>
-        <h2> {r.relation} </h2>
-    </div>
+    <Card>
+        <Card.Content>
+            <Card.Header>
+                {r.name}
+            </Card.Header>
+            <Card.Description>
+                {r.relation}
+            </Card.Description>
+        </Card.Content>
+    </Card>
 
 
 Member.propTypes = {
@@ -19,18 +26,14 @@ Member.propTypes = {
 }
 
 const MemberGrid = ({mems}) =>
-    <div>
+    <Card.Group>
         {
             mems.map(m => {
-                    return (
-                        <div key={m.name}>
-                            <Member r={m} />
-                            <br/>
-                        </div>)
+                    return (<Member r={m} />)
 
                 }
             )}
-    </div>
+    </Card.Group>
 
 MemberGrid.propTypes = {
     mems: PropTypes.arrayOf(PropTypes.shape({

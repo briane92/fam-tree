@@ -2,6 +2,7 @@
  * Created by beggl on 10/23/2017.
  */
 import React, { Component } from 'react'
+import {Modal} from 'semantic-ui-react'
 import './index.css'
 const withModal = (WrappedComponent) => {
     return class ModaledComponent extends Component {
@@ -10,31 +11,28 @@ const withModal = (WrappedComponent) => {
             super(props)
 
             this.state = {
-                showContent: props.showContent,
+                button: props.button,
+                open: false,
+                closeOnEscape: false,
+                closeOnRootNodeClick: false,
             }
 
-            this.closeModal = this.closeModal.bind(this);
+            this.close = this.close.bind(this);
         }
 
-        closeModal(event){
-            event.preventDefault()
-            this.setState({showContent:false})
+        close =() =>  this.setState({opent:false})
 
-        }
+
 
         render() {
+            const {closeOnEscape, closeOnRootNodeClick } = this.state
 
-            const showContent = this.state.showContent;
-            if(showContent){
-            return (<div className="modal">
-                <div className="modal-content">
-                    <span className="close" onClick={this.closeModal}>&times;</span>
+            return (
+            <Modal closeOnEscape={closeOnEscape} closeOnRootNodeClick = {closeOnRootNodeClick} trigger={this.state.button} closeIcon>
+                <Modal.Content>
                     <WrappedComponent />
-                </div>
-            </div>)
-            }else{
-                return null
-            }
+            </Modal.Content>
+            </Modal>)
         }
     }
 }

@@ -28,15 +28,14 @@ class App extends Component {
   render(
   ) {
         const RelationFormWithModal = withModal(RelationshipForm)
+        const relationshipButton = <Button color='black'>Add Relationship</Button>
         const EventFormWithModal = withModal(EventForm)
 
     return (
       <div className="App">
           <h1 id="heading"> Family Graph </h1>
-          <MemberGrid mems={this.state.relationships}/>
-          <button type="button" onClick={()=> this.setState({AddRelationship:true})}>Add Relationship</button> <button type="button" onClick={()=> this.setState({AddEvent:true})}>Add Event</button>
-          <Button onClick={()=> this.setState({AddRelationship:true})} color='black'> Add Relationship </Button>
-          <RelationFormWithModal showContent = {this.state.AddRelationship} />
+          <MemberGrid mems={this.state.relationships}/> <br/>
+          <RelationFormWithModal showContent = {this.state.AddRelationship} button = {relationshipButton} />
           <EventFormWithModal showContent = {this.state.AddEvent} />
       </div>
     );
