@@ -4,9 +4,33 @@ import {MemberGrid} from './member'
 import RelationshipForm from './relationship'
 import {EventForm} from './event'
 import withModal from './modal'
-import {Button} from 'semantic-ui-react'
+import {Button, Menu} from 'semantic-ui-react'
+import {Link, Switch, Route} from 'react-router-dom'
 
-class App extends Component {
+const Header = () =>
+    <Menu inverted>
+        <Menu.Item>
+            <Link to="/">Home</Link>
+        </Menu.Item>
+        <Menu.Item>
+            <Link to="/members">Members</Link>
+        </Menu.Item>
+        <Menu.Item>
+            <Link to="/timeline">Timeline</Link>
+        </Menu.Item>
+    </Menu>
+
+const Main2 = () =>
+    <main>
+        <Switch>
+            <Route exact path= '/' component={Home}/>
+            <Route path='/members' component={Main} />
+            <Route path='/timeline' component={Timeline}/>
+        </Switch>
+    </main>
+
+
+class Main extends Component {
     constructor () {
         super()
         this.state = {
@@ -25,25 +49,41 @@ class App extends Component {
         })
     }
 
-  render(
-  ) {
+    render(
+    ) {
         const RelationFormWithModal = withModal(RelationshipForm)
         const relationshipButton = <Button color='black'>Add Relationship</Button>
         const EventFormWithModal = withModal(EventForm)
 
-    return (
-      <div className="App">
-          <h1 id="heading"> Family Graph </h1>
-          <MemberGrid mems={this.state.relationships}/> <br/>
-          <RelationFormWithModal showContent = {this.state.AddRelationship} button = {relationshipButton} />
-          <EventFormWithModal showContent = {this.state.AddEvent} />
-      </div>
-    );
-  }
+        return (
+            <div className="App">
+                <h1 id="heading"> Family Members </h1>
+                <MemberGrid mems={this.state.relationships}/> <br/>
+                <RelationFormWithModal showContent = {this.state.AddRelationship} button = {relationshipButton} />
+                <EventFormWithModal showContent = {this.state.AddEvent} />
+            </div>
+        );
+    }
+
 }
 
+const Home = () =>
+    <div>
+        <h1> Welcome to Memories</h1>
+        <p> Memories allows you to document your family history. Get started below by adding family members or create a timeline. </p>
+    </div>
+
+const Timeline = () =>
+    <div>
+        <h1>Not implemented !</h1>
+    </div>
 
 
+const App = () =>
+    <div>
+        <Header/>
+        <Main2/>
+    </div>
 
 
 export default App;

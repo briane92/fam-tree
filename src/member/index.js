@@ -8,6 +8,7 @@ import {Card } from 'semantic-ui-react'
 const Member = ({r}) =>
     <Card>
         <Card.Content>
+            <i className="fa fa-user fa-5x" aria-hidden="true"/>
             <Card.Header>
                 {r.name}
             </Card.Header>
