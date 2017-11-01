@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './App.css'
-import {MemberGrid} from './member'
+import {MemberGrid, MemberPage} from './member'
 import RelationshipForm from './relationship'
 import {EventForm} from './event'
 import withModal from './modal'
@@ -20,52 +20,15 @@ const Header = () =>
         </Menu.Item>
     </Menu>
 
-const Main2 = () =>
+const Main = () =>
     <main>
         <Switch>
             <Route exact path= '/' component={Home}/>
-            <Route path='/members' component={Main} />
+            <Route path='/members' component={MemberPage} />
             <Route path='/timeline' component={Timeline}/>
         </Switch>
     </main>
 
-
-class Main extends Component {
-    constructor () {
-        super()
-        this.state = {
-            AddRelationship: false,
-            AddEvent:false,
-        }
-        this.closeModal = this.closeModal.bind(this);
-        this.addRelation = this.addRelation.bind(this);
-    }
-
-    closeModal = () => this.setState({AddRelationship:false})
-    addRelation = (relation)  => {
-        const updatedrelations = [...this.state.relationships, relation]
-        this.setState({
-            relationships: updatedrelations
-        })
-    }
-
-    render(
-    ) {
-        const RelationFormWithModal = withModal(RelationshipForm)
-        const relationshipButton = <Button color='black'>Add Relationship</Button>
-        const EventFormWithModal = withModal(EventForm)
-
-        return (
-            <div className="App">
-                <h1 id="heading"> Family Members </h1>
-                <MemberGrid mems={this.state.relationships}/> <br/>
-                <RelationFormWithModal showContent = {this.state.AddRelationship} button = {relationshipButton} />
-                <EventFormWithModal showContent = {this.state.AddEvent} />
-            </div>
-        );
-    }
-
-}
 
 const Home = () =>
     <div>
@@ -82,7 +45,7 @@ const Timeline = () =>
 const App = () =>
     <div>
         <Header/>
-        <Main2/>
+        <Main/>
     </div>
 
 

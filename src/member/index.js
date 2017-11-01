@@ -4,6 +4,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {Card } from 'semantic-ui-react'
+import MemberPage from './memberpage'
 
 const Member = ({r}) =>
     <Card>
@@ -60,4 +61,4 @@ MemberGrid.defaultProps = {
 
 
 
-export {Member, MemberGrid}
+export {Member, MemberGrid, MemberPage}
