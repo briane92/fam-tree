@@ -39,8 +39,12 @@ const MemberGrid = ({mems}) =>
             )}
     </Card.Group>
 
-const MemberGridWithData = ({data}) =>
-    <MemberGrid mems={data.allMembers}/>
+const MemberGridWithData = ({data}) => {
+    console.log(data)
+        return (
+        <MemberGrid mems={data.allMembers}/>
+        )
+}
 
 
 MemberGrid.propTypes = {
@@ -69,6 +73,7 @@ const membersQuery  = gql `
     query {
         allMembers {
             name
+            relation
             bio
         }
     }
