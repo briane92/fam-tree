@@ -29,24 +29,28 @@ Member.propTypes = {
     }).isRequired
 }
 
-const MemberGrid = ({data}) =>
+const MemberGrid = ({mems}) =>
     <Card.Group>
         {
-            data.map(m => {
+            mems.map(m => {
                     return (<Member r={m} />)
 
                 }
             )}
     </Card.Group>
 
+const MemberGridWithData = ({data}) =>
+    <MemberGrid mems={data.allMembers}/>
+
+
 MemberGrid.propTypes = {
-    data: PropTypes.arrayOf(PropTypes.shape({
+    mems: PropTypes.arrayOf(PropTypes.shape({
         name: PropTypes.string,
         relation: PropTypes.string})).isRequired
 }
 
 MemberGrid.defaultProps = {
-    data: [
+    mems: [
         {
             name: "Brian",
             relation: "Self"
@@ -70,7 +74,7 @@ const membersQuery  = gql `
     }
 `
 
-const DataMemberGrid =  graphql(membersQuery)(MemberGrid)
+const DataMemberGrid =  graphql(membersQuery)(MemberGridWithData)
 
 
 
