@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './App.css'
 import {MemberPage} from './member'
-import {Button, Menu, Message, Icon} from 'semantic-ui-react'
+import {Menu, Message, Icon} from 'semantic-ui-react'
 import {Link, Switch, Route} from 'react-router-dom'
 
 

@@ -5,6 +5,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {Card } from 'semantic-ui-react'
 import MemberPage from './memberpage'
+import {graphql} from 'react-apollo'
+import gql from 'graphql-tag'
 
 const Member = ({r}) =>
     <Card>
@@ -27,10 +29,10 @@ Member.propTypes = {
     }).isRequired
 }
 
-const MemberGrid = ({mems}) =>
+const MemberGrid = ({data}) =>
     <Card.Group>
         {
-            mems.map(m => {
+            data.map(m => {
                     return (<Member r={m} />)
 
                 }
@@ -38,13 +40,13 @@ const MemberGrid = ({mems}) =>
     </Card.Group>
 
 MemberGrid.propTypes = {
-    mems: PropTypes.arrayOf(PropTypes.shape({
+    data: PropTypes.arrayOf(PropTypes.shape({
         name: PropTypes.string,
         relation: PropTypes.string})).isRequired
 }
 
 MemberGrid.defaultProps = {
-    mems: [
+    data: [
         {
             name: "Brian",
             relation: "Self"
@@ -59,6 +61,18 @@ MemberGrid.defaultProps = {
         }]
 }
 
+const membersQuery  = gql `
+    query {
+        allMembers {
+            name
+            bio
+        }
+    }
+`
+
+const DataMemberGrid =  graphql(membersQuery)(MemberGrid)
 
 
-export {Member, MemberGrid, MemberPage}
+
+
+export {Member, MemberGrid, MemberPage, DataMemberGrid}
