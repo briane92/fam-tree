@@ -4,6 +4,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {Button, Form } from 'semantic-ui-react'
+import gql from 'graphql-tag'
+import {graphql} from 'react-apollo'
+
 
 const RelationshipSelector = ({relationships, onChange}) =>
     <select onChange={onChange}>
@@ -22,8 +25,6 @@ RelationshipSelector.defaultProps = {
     relationships: ["Mother", "Father", "Sister", "Brother", "Self", "Uncle", "Aunt", "Cousin"]
 }
 
-
-
 class RelationshipForm extends Component {
 
     constructor(props){
@@ -32,28 +33,39 @@ class RelationshipForm extends Component {
             name: "Enter Name",
             relation: "self"
         }
+        this.closeAction = props.closeAction
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleName = this.handleName.bind(this)
         this.handleRelation = this.handleRelation.bind(this)
+        this.createMember = this.createMember.bind(this)
     }
 
 
     handleSubmit(event){
         event.preventDefault()
-        this.props.addRelation({
-            name: this.state.name,
-            relation: this.state.relation
-        })
+        if(this.closeAction) {
+            this.closeAction()
+        }
+        console.log(this.state.name + this.state.relation)
+        if(this.props.createMemberMutation){
+            this.createMember()
+        }
     }
 
     handleName(event){
-        console.log(event.target.value)
         this.setState({name:event.target.value})
     }
 
     handleRelation(event){
-        console.log(event.target.value)
         this.setState({relation:event.target.value})
+    }
+
+    createMember = async () => {
+        const {name, relation} = this.state
+        await this.props.createMemberMutation({
+            variables: {name, relation}
+        })
+
     }
 
 
@@ -75,6 +87,19 @@ class RelationshipForm extends Component {
               )
 
     }
-}
 
-export default RelationshipForm
+
+}
+const createMemberQuery = gql`
+     mutation createMemberMutation($name: String!, $relation: String!){
+        createMember (name: $name, relation: relation, ){
+            name
+            relation
+        } 
+    }
+`
+
+
+const RelationshipFormQL = graphql(createMemberQuery,{name: 'createMemberMutation'})(RelationshipForm)
+
+export {RelationshipForm, RelationshipFormQL}

@@ -3,8 +3,7 @@
  */
 import React, { Component } from 'react'
 import withModal from '../modal'
-import RelationshipForm from '../relationship'
-import {EventForm} from '../event'
+import {RelationshipForm, RelationshipFormQL} from '../relationship'
 import {MemberGrid, DataMemberGrid} from '../member'
 import {Button} from 'semantic-ui-react'
 
@@ -30,17 +29,14 @@ class MemberPage extends Component {
 
     render(
     ) {
-        const RelationFormWithModal = withModal(RelationshipForm)
         const relationshipButton = <Button color='black'>Add Relationship</Button>
-        const EventFormWithModal = withModal(EventForm)
-
+        const RelationFormWithModal = withModal(RelationshipForm)
         return (
             <div className="App">
                 <h1 id="heading"> Family Members </h1>
                 <MemberGrid mems={this.state.relationships}/> <br/>
                 <DataMemberGrid/> <br/>
-                <RelationFormWithModal showContent = {this.state.AddRelationship} button = {relationshipButton} />
-                <EventFormWithModal showContent = {this.state.AddEvent} />
+                <RelationFormWithModal showContent = {this.state.AddRelationship} button={relationshipButton} />
             </div>
         );
     }
