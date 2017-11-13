@@ -31,12 +31,15 @@ class MemberPage extends Component {
     ) {
         const relationshipButton = <Button color='black'>Add Relationship</Button>
         const RelationFormWithModal = withModal(RelationshipForm)
+//            <RelationFormWithModal showContent = {this.state.AddRelationship} button={relationshipButton} />
+
+        const RelationFormQLWithModal = withModal(RelationshipFormQL)
         return (
             <div className="App">
                 <h1 id="heading"> Family Members </h1>
                 <MemberGrid mems={this.state.relationships}/> <br/>
                 <DataMemberGrid/> <br/>
-                <RelationFormWithModal showContent = {this.state.AddRelationship} button={relationshipButton} />
+                <RelationFormQLWithModal showContent = {this.state.AddRelationship} button={relationshipButton} />
             </div>
         );
     }

@@ -92,7 +92,7 @@ class RelationshipForm extends Component {
 }
 const createMemberQuery = gql`
      mutation createMemberMutation($name: String!, $relation: String!){
-        createMember (name: $name, relation: relation, ){
+        createMember (name: $name, relation: $relation, ){
             name
             relation
         } 
