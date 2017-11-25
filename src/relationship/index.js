@@ -8,10 +8,15 @@ import gql from 'graphql-tag'
 import {graphql} from 'react-apollo'
 
 
-const RelationshipSelector = ({relationships, onChange}) =>
-    <select onChange={onChange}>
-        { relationships.map( (r) =>
-            <option key={r} value ={r}> {r} </option>
+const RelationshipSelector = ({relationships, onChange, selected, value}) =>
+    <select onChange={onChange} value={ `${value.charAt(0).toUpperCase()}${value.substring(1)}` }>
+        {relationships.map( (r) => {
+                if (true ) {
+                   return  <option key={r} value={r} > {r} </option>
+                } else {
+                    return <option key={r} value={r} > {r} </option>
+                }
+            }
         )}
     </select>
 
@@ -102,4 +107,4 @@ const createMemberQuery = gql`
 
 const RelationshipFormQL = graphql(createMemberQuery,{name: 'createMemberMutation'})(RelationshipForm)
 
-export {RelationshipForm, RelationshipFormQL}
+export {RelationshipForm, RelationshipSelector, RelationshipFormQL}

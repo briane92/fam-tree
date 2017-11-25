@@ -7,11 +7,13 @@ import {Card } from 'semantic-ui-react'
 import MemberPage from './memberpage'
 import {graphql} from 'react-apollo'
 import gql from 'graphql-tag'
+import {Link, Switch, Route} from 'react-router-dom'
+
 
 const Member = ({r}) =>
     <Card>
         <Card.Content>
-            <i className="fa fa-user fa-5x" aria-hidden="true"/>
+            <Link to={{pathname:`/members/${r.id}`}}><i className="fa fa-user fa-5x" aria-hidden="true"/></Link>
             <Card.Header>
                 {r.name}
             </Card.Header>
@@ -20,6 +22,7 @@ const Member = ({r}) =>
             </Card.Description>
         </Card.Content>
     </Card>
+
 
 
 Member.propTypes = {
@@ -34,6 +37,7 @@ const MemberGrid = ({mems}) =>
         {
             mems.map(m => {
                     return (<Member r={m} />)
+
 
                 }
             )}
@@ -56,14 +60,17 @@ MemberGrid.propTypes = {
 MemberGrid.defaultProps = {
     mems: [
         {
+            id: 0,
             name: "Brian",
             relation: "Self"
         },
         {
+            id:1,
             name: "Lashelle",
             relation: "Mother"
         },
         {
+            id:2,
             name: "Brooke",
             relation: "Sister"
         }]
@@ -72,6 +79,7 @@ MemberGrid.defaultProps = {
 const membersQuery  = gql `
     query {
         allMembers {
+            id
             name
             relation
             bio

@@ -1,12 +1,13 @@
 import React from 'react'
 import './App.css'
 import {MemberPage} from './member'
+import {ProfileDisplay} from './member/profile'
 import {Menu, Message, Icon} from 'semantic-ui-react'
 import {Link, Switch, Route} from 'react-router-dom'
 
 
 const Home = () =>
-    <div>
+    <div className="App">
         <h1> Welcome to Memories</h1>
         <p> Memories allows you to document your family history. Get started below by adding family members or create a timeline. </p>
     </div>
@@ -36,6 +37,7 @@ const Main = () =>
     <main>
         <Switch>
             <Route exact path= '/' component={Home}/>
+            <Route path='/members/:id' component={ProfileDisplay}/>
             <Route path='/members' component={MemberPage} />
             <Route path='/timeline' component={Timeline}/>
         </Switch>
@@ -44,7 +46,7 @@ const Main = () =>
 const App = () =>
     <div>
         <Header/>
-        <Main/>
+        <Main className="App"/>
     </div>
 
 
