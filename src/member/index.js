@@ -6,11 +6,10 @@ import PropTypes from 'prop-types'
 import {Card } from 'semantic-ui-react'
 import MemberPage from './memberpage'
 import {graphql} from 'react-apollo'
-import gql from 'graphql-tag'
-import {Link, Switch, Route} from 'react-router-dom'
+import {Link} from 'react-router-dom'
+import {getAllMembersQuery} from '../api/member'
 
-
-const Member = ({r}) =>
+const MemberCard = ({r}) =>
     <Card>
         <Card.Content>
             <Link to={{pathname:`/members/${r.id}`}}><i className="fa fa-user fa-5x" aria-hidden="true"/></Link>
@@ -24,40 +23,26 @@ const Member = ({r}) =>
     </Card>
 
 
-
-Member.propTypes = {
+MemberCard.propTypes = {
     r: PropTypes.shape({
         name: PropTypes.string,
         relation: PropTypes.string
     }).isRequired
 }
 
-const MemberGrid = ({mems}) =>
+const MemberCardGrid = ({mems}) =>
     <Card.Group>
-        {
-            mems.map(m => {
-                    return (<Member r={m} />)
-
-
-                }
-            )}
+        {mems.map(m => <MemberCard key={m.id} r={m} />)}
     </Card.Group>
 
-const MemberGridWithData = ({data}) => {
-    console.log(data)
-        return (
-        <MemberGrid mems={data.allMembers}/>
-        )
-}
 
-
-MemberGrid.propTypes = {
+MemberCardGrid.propTypes = {
     mems: PropTypes.arrayOf(PropTypes.shape({
         name: PropTypes.string,
         relation: PropTypes.string})).isRequired
 }
 
-MemberGrid.defaultProps = {
+MemberCardGrid.defaultProps = {
     mems: [
         {
             id: 0,
@@ -76,20 +61,14 @@ MemberGrid.defaultProps = {
         }]
 }
 
-const membersQuery  = gql `
-    query {
-        allMembers {
-            id
-            name
-            relation
-            bio
-        }
-    }
-`
+const MemberCardGridWithData = ({data}) => {
+    console.log(data)
+    return (
+        <MemberCardGrid mems={data.allMembers}/>
+    )
+}
 
-const DataMemberGrid =  graphql(membersQuery)(MemberGridWithData)
+const DataMemberGrid =  graphql(getAllMembersQuery)(MemberCardGridWithData)
 
 
-
-
-export {Member, MemberGrid, MemberPage, DataMemberGrid}
+export {MemberCard, MemberCardGrid, MemberPage, DataMemberGrid}
