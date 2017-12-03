@@ -31,10 +31,18 @@ class MemberPage extends Component {
     ) {
         const relationshipButton = <Button color='black'>Add Relationship</Button>
         const RelationFormQLWithModal = withModal(RelationshipFormQL)
+        const user = localStorage.getItem('userName')
+        console.log(user)
+        let userName = ''
+        if(user){
+            userName = user
+            console.log(userName)
+        }
+
         return (
             <div className="App">
                 <h1 id="heading"> Family Members </h1>
-                <DataMemberGrid/> <br/>
+                <DataMemberGrid userName={userName}/> <br/>
                 <RelationFormQLWithModal showContent = {this.state.AddRelationship} button={relationshipButton} />
             </div>
         );

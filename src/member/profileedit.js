@@ -34,18 +34,17 @@ class ProfileEdit extends Component {
 
     handleBio(event) {
         let newMember = {...this.state.member, bio: event.target.value}
-        console.log(newMember)
         this.setState( { member: newMember})
     }
 
     handleName(event){
         let newMember = {...this.state.member, name: event.target.value}
-        console.log(event.target.value)
         this.setState({member: newMember})
     }
 
     handleRelation(event){
-        this.setState({relation:event.target.value})
+        let newMember = {...this.state.member, relation: event.target.value}
+        this.setState({member:newMember})
     }
 
     updateMember = async() => {

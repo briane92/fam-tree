@@ -7,7 +7,8 @@ import {Card } from 'semantic-ui-react'
 import MemberPage from './memberpage'
 import {graphql} from 'react-apollo'
 import {Link} from 'react-router-dom'
-import {getAllMembersQuery} from '../api/member'
+import gql from 'graphql-tag'
+
 
 const MemberCard = ({r}) =>
     <Card>
@@ -16,17 +17,35 @@ const MemberCard = ({r}) =>
             <Card.Header>
                 {r.name}
             </Card.Header>
-            <Card.Description>
+            <Card.Meta>
                 {r.relation}
+            </Card.Meta>
+            <Card.Description>
+                {shortenBio(r.bio)}
             </Card.Description>
         </Card.Content>
     </Card>
 
 
+const shortenBio = (bio) => {
+    if(bio && bio.length > 100) {
+        return bio.substr(0, 100);
+    }else{
+        return bio
+    }
+}
+
+
+MemberCard.query =
+    `name
+    relation
+    bio`
+
 MemberCard.propTypes = {
     r: PropTypes.shape({
         name: PropTypes.string,
-        relation: PropTypes.string
+        relation: PropTypes.string,
+        bio: PropTypes.string,
     }).isRequired
 }
 
@@ -41,6 +60,12 @@ MemberCardGrid.propTypes = {
         name: PropTypes.string,
         relation: PropTypes.string})).isRequired
 }
+
+MemberCardGrid.query = gql `query allMembers($userName: String!){
+        allMembers(userName:$userName) {
+            ${MemberCard.query}
+            }
+         }`
 
 MemberCardGrid.defaultProps = {
     mems: [
@@ -68,7 +93,8 @@ const MemberCardGridWithData = ({data}) => {
     )
 }
 
-const DataMemberGrid =  graphql(getAllMembersQuery)(MemberCardGridWithData)
+
+const DataMemberGrid =  graphql(MemberCardGrid.query, {options:({userName}) => ({ variables:{userName}})})(MemberCardGridWithData)
 
 
 export {MemberCard, MemberCardGrid, MemberPage, DataMemberGrid}

@@ -7,8 +7,10 @@ import App from './App'
 import registerServiceWorker from './registerServiceWorker'
 import {BrowserRouter} from 'react-router-dom'
 import { ApolloClient } from 'apollo-client'
+import { setContext } from 'apollo-link-context'
 import {ApolloProvider} from 'react-apollo'
 import { HttpLink } from 'apollo-link-http'
+import { createHttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory'
 
 
@@ -17,12 +19,32 @@ if(process.env.NODE_ENV === 'production'){
     uri = 'https://stark-chamber-38796.herokuapp.com/graphql'
 }else
 {
-    uri='http://localhost:8080/graphql'
+    uri='http://localhost:4000/graphql'
 }
+
+console.log(uri)
+
+const httpLink = createHttpLink({
+    uri:uri
+})
+
+const authLink = setContext((_, {headers})=>{
+
+    const token = localStorage.getItem('jwt')
+    console.log(token)
+    return {
+        headers: {
+            ...headers,
+            authorization: token ? `Bearer ${token}` : null
+        }
+    }
+
+})
+
 
 
 const client = new ApolloClient({
-    link: new HttpLink({ uri:uri}),
+    link: authLink.concat(httpLink),
     cache: new InMemoryCache({dataIdFromObject: o => o.id})
 });
 
