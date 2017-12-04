@@ -88,6 +88,10 @@ MemberCardGrid.defaultProps = {
 
 const MemberCardGridWithData = ({data}) => {
     console.log(data)
+    if(data.loading)
+        return(<div>
+            <p>Loading....</p>
+        </div>)
     return (
         <MemberCardGrid mems={data.allMembers}/>
     )

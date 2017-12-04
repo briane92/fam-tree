@@ -2,8 +2,8 @@ import React from 'react'
 import './App.css'
 import {MemberPage} from './member'
 import {ProfileDisplay} from './member/profile'
-import {Menu, Message, Icon} from 'semantic-ui-react'
-import {Link, Switch, Route} from 'react-router-dom'
+import {Menu, Message, Icon, Button} from 'semantic-ui-react'
+import {Link, Switch, Route, Redirect, withRouter} from 'react-router-dom'
 import {SigninWithDataWithRouter as Signin} from './login'
 
 
@@ -21,7 +21,21 @@ const Timeline = () =>
         </Message>
     </div>
 
-const Header = () =>
+
+const logout = ({client, history}) => {
+    localStorage.clear()
+    client.resetStore()
+    history.push("/")
+}
+
+const LogOutButton = (props) => {
+    return ( <Button onClick={()=> logout(props)}> Sign Out</Button> )
+}
+
+const LogOutButtonWithRouther = withRouter(LogOutButton)
+
+
+const Header = (props) =>
         <Menu inverted fixed='top'>
             <Menu.Item>
                 <Link to="/">Home</Link>
@@ -34,6 +48,9 @@ const Header = () =>
             </Menu.Item>
             <Menu.Item>
                 <Link to="/signin">Signin</Link>
+            </Menu.Item>
+            <Menu.Item>
+              <LogOutButtonWithRouther client={props.client}/>
             </Menu.Item>
         </Menu>
 
@@ -48,9 +65,9 @@ const Main = () =>
         </Switch>
     </main>
 
-const App = () =>
+const App = (props) =>
     <div>
-        <Header/>
+        <Header client={props.client}/>
         <Main className="App"/>
     </div>
 

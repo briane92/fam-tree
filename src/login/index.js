@@ -28,6 +28,9 @@ class SigninForm extends Component {
         event.preventDefault()
         this.login()
 
+      //this is hacky
+       this.props.history.push('/')
+
     }
 
     handleUserName(event){
@@ -44,7 +47,7 @@ class SigninForm extends Component {
             variables: {auth: auth}
         }).then( ({data}) =>{
             console.log(data)
-            this.setState({isAuthenticated:true})
+           // this.setState({isAuthenticated:true})
             localStorage.setItem('jwt', data.signin.token)
             localStorage.setItem('userName', data.signin.user)
         })
@@ -84,6 +87,10 @@ const signinMutation = gql `
         }
     }`
 
-const SigninWithData = graphql(signinMutation)(SigninForm)
+const SigninWithData = graphql(signinMutation,{
+    options: {
+        refetchQueries:['allMembers']
+    }
+})(SigninForm)
 const SigninWithDataWithRouter = withRouter(SigninWithData)
 export {SigninWithDataWithRouter}

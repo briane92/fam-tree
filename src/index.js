@@ -51,7 +51,7 @@ const client = new ApolloClient({
 const app =
     <ApolloProvider client={client}>
         <BrowserRouter>
-            <App/>
+            <App client={client}/>
         </BrowserRouter>
     </ApolloProvider>
 
