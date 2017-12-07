@@ -8,14 +8,14 @@ import {Profile} from './profile'
 
 
 describe('<Profile />', () => {
-    it('render bio when there is one', ()=> {
+    test('render bio when there is one', ()=> {
         const member =  {name:'Jane Doe', relation: 'Mother', bio: 'Jane Doe was born blah blah blah'}
         const wrapper = shallow(<Profile member={member} />)
         const bio = wrapper.find('p')
         expect(bio.text()).toBe(member.bio)
     })
 
-    it('renders add bio button when there no bio', () => {
+    test('renders add bio button when there no bio', () => {
         const member = {name:"Jane Doe", relation: 'Mother'}
         const wrapper = shallow(<Profile member={member} />)
         const button = wrapper.find('button')

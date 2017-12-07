@@ -93,4 +93,4 @@ const SigninWithData = graphql(signinMutation,{
     }
 })(SigninForm)
 const SigninWithDataWithRouter = withRouter(SigninWithData)
-export {SigninWithDataWithRouter}
+export {SigninForm, SigninWithDataWithRouter}
