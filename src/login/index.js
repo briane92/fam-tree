@@ -69,7 +69,7 @@ class SigninForm extends Component {
                             <label>Password</label>
                             <input type="text" onChange={this.handlePassword} value={this.state.password}/>
                         </Form.Field>
-                        <Button type='submit' color='black'>Sign in</Button>
+                        <button type='submit' color='black'>Sign in</button>
                     </Form>
                 </div>
             )

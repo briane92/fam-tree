@@ -30,7 +30,7 @@ RelationshipSelector.defaultProps = {
     relationships: ["Mother", "Father", "Sister", "Brother", "Self", "Uncle", "Aunt", "Cousin"]
 }
 
-class RelationshipForm extends Component {
+class CreateMemberForm extends Component {
 
     constructor(props){
         super(props)
@@ -105,6 +105,6 @@ const createMemberQuery = gql`
 `
 
 
-const RelationshipFormQL = graphql(createMemberQuery,{name: 'createMemberMutation'})(RelationshipForm)
+const RelationshipFormQL = graphql(createMemberQuery,{name: 'createMemberMutation'})(CreateMemberForm)
 
-export {RelationshipForm, RelationshipSelector, RelationshipFormQL}
+export {CreateMemberForm, RelationshipSelector, RelationshipFormQL}
