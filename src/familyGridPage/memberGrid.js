@@ -1,5 +1,5 @@
 /**
- * Created by beggl on 10/20/2017.
+ * Created by beggl on 12/9/2017.
  */
 import React from 'react'
 import PropTypes from 'prop-types'
@@ -98,7 +98,6 @@ const MemberCardGridWithData = ({data}) => {
 }
 
 
-const DataMemberGrid =  graphql(MemberCardGrid.query, {options:({userName}) => ({ variables:{userName}})})(MemberCardGridWithData)
+const MemberGridWithData =  graphql(MemberCardGrid.query, {options:({userName}) => ({ variables:{userName}})})(MemberCardGridWithData)
 
-
-export {MemberCard, MemberCardGrid, MemberPage, DataMemberGrid}
+export default MemberGridWithData

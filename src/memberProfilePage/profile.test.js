@@ -4,7 +4,7 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
 import {shallow, mount, render} from 'enzyme'
-import {Profile} from './profile'
+import {Profile} from './profileContainer'
 
 
 describe('<Profile />', () => {

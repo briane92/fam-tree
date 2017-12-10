@@ -1,20 +1,20 @@
 /**
  * Created by beggl on 10/21/2017.
  */
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import {Button, Form } from 'semantic-ui-react'
+import {Button, Form} from 'semantic-ui-react'
 import gql from 'graphql-tag'
 import {graphql} from 'react-apollo'
 
 
 const RelationshipSelector = ({relationships, onChange, selected, value}) =>
     <select onChange={onChange} value={ `${value.charAt(0).toUpperCase()}${value.substring(1)}` }>
-        {relationships.map( (r) => {
-                if (true ) {
-                   return  <option key={r} value={r} > {r} </option>
+        {relationships.map((r) => {
+                if (true) {
+                    return <option key={r} value={r}> {r} </option>
                 } else {
-                    return <option key={r} value={r} > {r} </option>
+                    return <option key={r} value={r}> {r} </option>
                 }
             }
         )}
@@ -32,7 +32,7 @@ RelationshipSelector.defaultProps = {
 
 class CreateMemberForm extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
             name: "Enter Name",
@@ -46,26 +46,26 @@ class CreateMemberForm extends Component {
     }
 
 
-    handleSubmit(event){
+    handleSubmit(event) {
         event.preventDefault()
-        if(this.closeAction) {
+        if (this.closeAction) {
             this.closeAction()
         }
         console.log(this.state.name + this.state.relation)
-        if(this.props.createMemberMutation){
+        if (this.props.createMemberMutation) {
             this.createMember()
         }
     }
 
-    handleName(event){
-        this.setState({name:event.target.value})
+    handleName(event) {
+        this.setState({name: event.target.value})
     }
 
-    handleRelation(event){
-        this.setState({relation:event.target.value})
+    handleRelation(event) {
+        this.setState({relation: event.target.value})
     }
 
-    createMember = async () => {
+    createMember = async() => {
         const {name, relation} = this.state
         await this.props.createMemberMutation({
             variables: {name, relation}
@@ -73,25 +73,18 @@ class CreateMemberForm extends Component {
 
     }
 
-
-    render() {
-
-
-            return (
-                        <Form onSubmit={this.handleSubmit}>
-                            <Form.Field>
-                                <label>Name</label>
-                                <input type="text" placeholder='Name of Family Member' onChange={this.handleName}/> <br/>
-                            </Form.Field>
-                            <Form.Field>
-                                <label>Relationship</label>
-                                <RelationshipSelector onChange={this.handleRelation}/><br/>
-                            </Form.Field>
-                            <Button type='submit' color='black' >Add</Button>
-                        </Form>
-              )
-
-    }
+    render = () =>
+        <Form onSubmit={this.handleSubmit}>
+            <Form.Field>
+                <label>Name</label>
+                <input type="text" placeholder='Name of Family Member' onChange={this.handleName}/> <br/>
+            </Form.Field>
+            <Form.Field>
+                <label>Relationship</label>
+                <RelationshipSelector onChange={this.handleRelation}/><br/>
+            </Form.Field>
+            <Button type='submit' color='black'>Add</Button>
+        </Form>
 
 
 }
@@ -105,6 +98,6 @@ const createMemberQuery = gql`
 `
 
 
-const RelationshipFormQL = graphql(createMemberQuery,{name: 'createMemberMutation'})(CreateMemberForm)
+const CreateMemberFormWithData = graphql(createMemberQuery, {name: 'createMemberMutation'})(CreateMemberForm)
 
-export {CreateMemberForm, RelationshipSelector, RelationshipFormQL}
+export default CreateMemberFormWithData

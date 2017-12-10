@@ -1,7 +1,7 @@
 /**
  * Created by beggl on 11/24/2017.
  */
-import './profileedit.css'
+import './profileEdit.css'
 import React, {Component} from 'react'
 import {RelationshipSelector} from '../relationship'
 import {Button, Form } from 'semantic-ui-react'
@@ -84,7 +84,14 @@ class ProfileEdit extends Component {
     }
 }
 
-const ProfileEditWithData = graphql(updateMemberMutation)(ProfileEdit)
-const ProfileEditWithDataWithRouter = withRouter(ProfileEditWithData)
+ProfileEdit.mutation = gql 
+    `mutation updateMember($id: Int!, $input: MemberInput){
+        updateMember(id: $id, input:$input){
+            id
+        }
+    }
+`
 
+const ProfileEditWithData = graphql(ProfileEdit.mutation)(ProfileEdit)
+const ProfileEditWithDataWithRouter = withRouter(ProfileEditWithData)
 export {ProfileEditWithDataWithRouter}

@@ -3,8 +3,8 @@
  */
 import React, { Component } from 'react'
 import withModal from '../modal'
-import {RelationshipFormQL} from '../relationship'
-import {DataMemberGrid} from '../member'
+import CreateMemberFormWithData from './createMember'
+import {MemberGridWithData as MemberGrid} from './memberGrid'
 import {Button} from 'semantic-ui-react'
 
 
@@ -50,13 +50,13 @@ class MemberPage extends Component {
     render(
     ) {
         const relationshipButton = <Button color='black'>Add Relationship</Button>
-        const RelationFormQLWithModal = withModal(RelationshipFormQL)
+        const CreateMemberForm = withModal(CreateMemberFormWithData)
 
         return (
             <div className="App">
                 <h1 id="heading"> Family Members </h1>
-                <DataMemberGrid userName={this.state.userName}/> <br/>
-                <RelationFormQLWithModal showContent = {this.state.AddRelationship} button={relationshipButton} />
+                <MemberGrid userName={this.state.userName}/> <br/>
+                <CreateMemberFormvb  showContent = {this.state.AddRelationship} button={relationshipButton} />
             </div>
         );
     }
