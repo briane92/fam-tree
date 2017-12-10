@@ -100,4 +100,4 @@ const createMemberQuery = gql`
 
 const CreateMemberFormWithData = graphql(createMemberQuery, {name: 'createMemberMutation'})(CreateMemberForm)
 
-export default CreateMemberFormWithData
+export {CreateMemberFormWithData, RelationshipSelector}

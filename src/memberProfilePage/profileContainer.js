@@ -2,6 +2,8 @@
  * Created by beggl on 11/14/2017.
  */
 import React, {Component} from 'react'
+import graphql from 'graphql'
+
 import {Loading} from '../uiComponents'
 import {ProfileEditWithDataWithRouter as ProfileEdit} from './profileEdit'
 import {Profile} from './profile'

@@ -1,7 +1,10 @@
 /**
  * Created by beggl on 12/9/2017.
  */
+import React from 'react'
 import gql from 'graphql-tag'
+import {Header, Button, Label} from 'semantic-ui-react'
+
 
 const BioSection = ({bio}) => {
     if(bio){

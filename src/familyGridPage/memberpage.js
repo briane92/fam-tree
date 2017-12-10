@@ -2,9 +2,9 @@
  * Created by beggl on 10/31/2017.
  */
 import React, { Component } from 'react'
-import withModal from '../modal'
-import CreateMemberFormWithData from './createMember'
-import {MemberGridWithData as MemberGrid} from './memberGrid'
+import {withModal} from '../uiComponents'
+import {CreateMemberFormWithData} from './createMember'
+import {MemberGridWithData as MemberGrid} from './memberGrid.js'
 import {Button} from 'semantic-ui-react'
 
 
@@ -56,7 +56,7 @@ class MemberPage extends Component {
             <div className="App">
                 <h1 id="heading"> Family Members </h1>
                 <MemberGrid userName={this.state.userName}/> <br/>
-                <CreateMemberFormvb  showContent = {this.state.AddRelationship} button={relationshipButton} />
+                <CreateMemberForm  showContent = {this.state.AddRelationship} button={relationshipButton} />
             </div>
         );
     }

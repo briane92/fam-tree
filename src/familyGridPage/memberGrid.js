@@ -100,4 +100,4 @@ const MemberCardGridWithData = ({data}) => {
 
 const MemberGridWithData =  graphql(MemberCardGrid.query, {options:({userName}) => ({ variables:{userName}})})(MemberCardGridWithData)
 
-export default MemberGridWithData
+export {MemberGridWithData}

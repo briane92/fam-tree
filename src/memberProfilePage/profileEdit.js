@@ -3,11 +3,11 @@
  */
 import './profileEdit.css'
 import React, {Component} from 'react'
-import {RelationshipSelector} from '../relationship'
 import {Button, Form } from 'semantic-ui-react'
 import {graphql} from 'react-apollo'
-import {updateMemberMutation} from '../api/member'
+import gql from 'graphql-tag'
 import { withRouter } from 'react-router'
+import {RelationshipSelector} from '../familyGridPage'
 
 
 class ProfileEdit extends Component {

@@ -1,10 +1,10 @@
 import React from 'react'
 import './App.css'
-import {MemberPage} from './familyGridPage'
+import {MemberPage} from '../familyGridPage'
 import {ProfileDisplay} from '../memberProfilePage/profileContainer'
 import {Menu, Message, Icon, Button} from 'semantic-ui-react'
 import {Link, Switch, Route, Redirect, withRouter} from 'react-router-dom'
-import {SigninWithDataWithRouter as Signin} from './login'
+import {SigninWithDataWithRouter as Signin} from '../login'
 
 
 const Home = () =>
